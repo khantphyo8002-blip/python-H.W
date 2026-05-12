@@ -69,22 +69,26 @@ def open_staff():
                 row = stafftreeview.item(select_item[0])
                 staff_id = row["values"][0]
                 
+                #update_name = name_entry.get()
+                #update_role = role_entry.get()
                 update_name = name_entry.get()
                 update_role = role_entry.get()
-                
-                con = connect()
-                cursor = con.cursor()
-                query = "UPDATE STAFF SET STAFF_NAME = %s, ROLE = %s WHERE STAFF_ID = %s"
-                cursor.execute(query, (update_name, update_role, staff_id))
-                con.commit()
-                
-                messagebox.showinfo("Success", "Staff update successfully")
-                
-                show_data()
-                
-                name_entry.delete(0, END)
-                role_entry.delete(0, END)
-                name_entry.focus()
+                if update_name == "" or update_role == "":
+                    messagebox.showwarning("Warning", "Please fill for your staff to update successfully")    
+                else:                
+                    con = connect()
+                    cursor = con.cursor()
+                    query = "UPDATE STAFF SET STAFF_NAME = %s, ROLE = %s WHERE STAFF_ID = %s"
+                    cursor.execute(query, (update_name, update_role, staff_id))
+                    con.commit()
+                    
+                    messagebox.showinfo("Success", "Staff update successfully")
+                    
+                    show_data()
+                    
+                    name_entry.delete(0, END)
+                    role_entry.delete(0, END)
+                    name_entry.focus()
                 
             except Exception as e:
                 messagebox.showerror("Error", str(e))

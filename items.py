@@ -117,25 +117,28 @@ def open_items():
         
                 category_id = category_dict[category_name]  
                 
-                con = connect()
-                cursor = con.cursor()
-                query = "UPDATE ITEMS SET ITEM_NAME = %s, PRICE = %s, BARCODE = %s, CAT_ID = %s WHERE ITEM_ID = %s"
-                cursor.execute(query,(items_name, items_price, items_barcode, category_id, select_id))
-                con.commit()
-                
-                messagebox.showinfo("Success", "Item updat successfully")
-                
-                con.close()
-                
-                items_name_entry.delete(0, END)
-                items_price_entry.delete(0, END)
-                items_barcode_entry.delete(0, END)
-                items_category_combo.set("Select Category")
-                items_name_entry.focus()
-                
-                select_id = None
-                
-                show_data()
+                if items_name == "" or items_price == "" or items_barcode == "" or category_id == "":
+                    messagebox.showwarning("Warning", "Please fill for your item to update successfully")
+                else:
+                    con = connect()
+                    cursor = con.cursor()
+                    query = "UPDATE ITEMS SET ITEM_NAME = %s, PRICE = %s, BARCODE = %s, CAT_ID = %s WHERE ITEM_ID = %s"
+                    cursor.execute(query,(items_name, items_price, items_barcode, category_id, select_id))
+                    con.commit()
+                    
+                    messagebox.showinfo("Success", "Item updat successfully")
+                    
+                    con.close()
+                    
+                    items_name_entry.delete(0, END)
+                    items_price_entry.delete(0, END)
+                    items_barcode_entry.delete(0, END)
+                    items_category_combo.set("Select Category")
+                    items_name_entry.focus()
+                    
+                    select_id = None
+                    
+                    show_data()
             except Exception as e:
                 messagebox.showerror("Error", str(e))
                 

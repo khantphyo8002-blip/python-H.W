@@ -81,22 +81,25 @@ def open_category():
         else:
             try:
                 cat_name = cat_name_entry.get()
-                con = connect()
-                cursor = con.cursor()
-                query = "UPDATE CATEGORY SET CAT_NAME = %s WHERE CAT_ID = %s"
-                cursor.execute(query, (cat_name, selectid,))
-                con.commit()
-                
-                messagebox.showinfo("Success", "Category update successfully")
-                
-                con.close()
-                
-                show_data()
+                if cat_name == "":
+                    messagebox.showwarning("Warning", "Please fill for your category to update successfuly")
+                else:
+                    con = connect()
+                    cursor = con.cursor()
+                    query = "UPDATE CATEGORY SET CAT_NAME = %s WHERE CAT_ID = %s"
+                    cursor.execute(query, (cat_name, selectid,))
+                    con.commit()
                     
-                cat_name_entry.delete(0, END)
-                cat_name_entry.focus()
-                
-                selectid = None
+                    messagebox.showinfo("Success", "Category update successfully")
+                    
+                    con.close()
+                    
+                    show_data()
+                        
+                    cat_name_entry.delete(0, END)
+                    cat_name_entry.focus()
+                    
+                    selectid = None
                 
             except Exception as e:
                 messagebox.showerror("Error", str(e))
