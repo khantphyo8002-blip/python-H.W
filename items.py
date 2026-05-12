@@ -9,7 +9,7 @@ def open_items():
     items.title("Items System")
     items.geometry("800x500")
     select_id = None
-    
+
     def open_posmain_box():
         items.destroy()
         posmain.open_posmain()
