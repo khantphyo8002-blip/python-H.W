@@ -9,6 +9,10 @@ def open_posmain():
     posmain = Tk()
     posmain.title("POS System Main")
     posmain.geometry("600x500")
+    
+    def open_sale_box():
+        posmain.destroy()
+        #sale.open_sale()
 
     def open_category_box():
         posmain.destroy()
@@ -31,7 +35,7 @@ def open_posmain():
     pos_title = Label(posmain, text="POS System Deshboard", font=("Arial", 18 , "bold"))
     pos_title.pack(pady=(20))
 
-    pos_sale_btn = Button(posmain, text="POS Sale", bg="lightgreen",font=("Arial", 13), width=25, height=2, relief="ridge")
+    pos_sale_btn = Button(posmain, text="POS Sale", bg="lightgreen",font=("Arial", 13), width=25, height=2, relief="ridge", command=open_sale_box)
     pos_sale_btn.pack(pady=10)
 
     pos_manage = Label(posmain, text="Management", font=("Arial", 12))
